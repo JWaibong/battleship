@@ -1,11 +1,11 @@
 
 
-const pointMaker = (x, y,status) => {
+const pointMaker = (x, y) => {
 
     const properties = {
         x,
         y,
-        status,
+        status: false,
         /*
         setStatus: (bool) => {
             status = bool;

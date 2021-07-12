@@ -86,17 +86,11 @@ const gameBoard = (ships) => {
                 }
                 return output
             })(board);
-            console.log(pointsWithShips);
-            let counter = 0;
+            const temp = []
             for(let i=0; i<ships.length; i++){
-                for(let j=0; j<pointsWithShips.length; j++){
-                    if(ships[i] === pointsWithShips[j].ship){
-                        counter++;
-                        j += ships[i].length - 1; 
-                    }
-                }
+                temp.push(pointsWithShips.filter(point => point.ship === ships[i]));
             }
-            return counter;
+            return temp.length;
         },
 
 
