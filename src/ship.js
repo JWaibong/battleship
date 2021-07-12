@@ -1,9 +1,12 @@
-const pointMaker = (x, y, status) => {
+
+
+const pointMaker = (x, y,status) => {
 
     const properties = {
         x,
         y,
         status,
+        /*
         setStatus: (bool) => {
             status = bool;
         },
@@ -17,17 +20,25 @@ const pointMaker = (x, y, status) => {
         
         getY: () => {
             return y;
-        },
+        },*/
 
     };
+    const methods = {
+        get x(){ return properties.x},
+        get y(){ return properties.y},
 
-    return Object.assign({}, properties);
+        get status(){ return properties.status},
+        set status(bool){ return properties.status},
+
+    }
+
+    return Object.assign({}, properties,methods);
 }
 
 function deepCopyPoints(points){
     let output = []
     for(let i=0; i<points.length; i++){
-        output.push(pointMaker(points[i].getX(), points[i].getY()));
+        output.push(pointMaker(points[i].x, points[i].y));
     }
     return output;
 }
@@ -48,8 +59,8 @@ const shipMaker = (shallowPoints, length) => {
 
         isDamagedAt: (x,y) => { 
             for(let i=0; i<points.length; i++){
-                if(points[i].getX() === x && points[i].getY() === y){
-                    return points[i].getStatus();
+                if(points[i].x === x && points[i].y === y){
+                    return points[i].status;
                 }
             }
 
@@ -57,18 +68,18 @@ const shipMaker = (shallowPoints, length) => {
         receivesAttackAt: (x,y) => {
             let index;  
             for(let i=0; i<points.length; i++){
-                if(points[i].getX() === x && points[i].getY() === y){
+                if(points[i].x === x && points[i].y === y){
                     index = i;
                     break;
                 }
             }
-            points[index].setStatus(true); 
+            points[index].status = true; 
 
         },
  
         isSunk: () => {
             for(let i=0; i<points.length; i++){
-                if(!points[i].getStatus()){
+                if(!points[i].status){
                     return false;
                 }
             }

@@ -1,19 +1,18 @@
 import{shipMaker, pointMaker} from './ship.js';
 
 
-const testPoints = [(pointMaker(0,0)), (pointMaker(0,1))];
-
 
 test('create a ship of arbitrary length', () => {
+    const testPoints = [(pointMaker(0,0,false)), (pointMaker(0,1,false))];
+
 
     expect(shipMaker(testPoints,2).length).toBe(2);
 });
 
 
-
-
-
 test('detects a hit on an arbitrary point on the ship', () => {
+    const testPoints = [(pointMaker(0,0,false)), (pointMaker(0,1,false))];
+
 
 
     const ship = shipMaker(testPoints,2);
@@ -25,6 +24,8 @@ test('detects a hit on an arbitrary point on the ship', () => {
 
 
 test('detects that a ship is sunk', () => {
+    const testPoints = [(pointMaker(0,0,false)), (pointMaker(0,1,false))];
+
 
 
     const ship = shipMaker(testPoints,2);
@@ -35,6 +36,8 @@ test('detects that a ship is sunk', () => {
 });
 
 test('detects that a ship is not sunk', () => {
+
+    const testPoints = [(pointMaker(0,0,false)), (pointMaker(0,1,false))];
 
 
     const ship = shipMaker(testPoints,2);
