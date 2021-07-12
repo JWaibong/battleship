@@ -44,5 +44,49 @@ test('initalizes board with 4 ships', () => {
     expect(board.countShips()).toBe(4);
 });
 
+test('sends an attack to one of the ships on the board', () => {
+    const testPoints = [(pointMaker(0,0)), (pointMaker(0,1))];
+    const ship1 = shipMaker(testPoints,2);
+
+    const testPoints2 = [(pointMaker(1,1)), (pointMaker(1,2)),(pointMaker(1,3))];
+    const ship2 = shipMaker(testPoints2,3);
+
+    const testShips = [ship1,ship2];
+    const board = gameBoard(testShips);
+    board.receiveAttack(1,1)
+    expect(ship2.points[0].status).toBe(true);
+});
+
+test('sinks a ship on the board', () => {
+    const testPoints = [(pointMaker(0,0)), (pointMaker(0,1))];
+    const ship1 = shipMaker(testPoints,2);
+
+    const testPoints2 = [(pointMaker(1,1)), (pointMaker(1,2)),(pointMaker(1,3))];
+    const ship2 = shipMaker(testPoints2,3);
+
+    const testShips = [ship1,ship2];
+    const board = gameBoard(testShips);
+    board.receiveAttack(0,0)
+    board.receiveAttack(0,1)
+    expect(ship1.isSunk()).toBe(true);
+});
+
+test('detects gameover all ships sunk', () => {
+    const testPoints = [(pointMaker(0,0)), (pointMaker(0,1))];
+    const ship1 = shipMaker(testPoints,2);
+
+    const testPoints2 = [(pointMaker(1,1)), (pointMaker(1,2)),(pointMaker(1,3))];
+    const ship2 = shipMaker(testPoints2,3);
+
+    const testShips = [ship1,ship2];
+    const board = gameBoard(testShips);
+    board.receiveAttack(0,0)
+    board.receiveAttack(0,1)
+    board.receiveAttack(1,1)
+    board.receiveAttack(1,2)
+    board.receiveAttack(1,3)
+
+    expect(board.isGameOver()).toBe(true);
+});
 
 

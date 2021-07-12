@@ -54,12 +54,11 @@ const gameBoard = (ships) => {
             for(let l=0; l<ships[k].points.length; l++){
                 const xVal = ships[k].points[l].x;
                 const yVal = ships[k].points[l].y;
-                //output[xVal][yVal].setShip(ships[k]);
-                //output[xVal][yVal].setHasShip(true);
+
                 output[xVal][yVal].ship = ships[k];
                 output[xVal][yVal].hasShip = true;
 
-                //console.log(output[xVal][yVal].getShip());
+    
             }            
         }
 
@@ -70,6 +69,8 @@ const gameBoard = (ships) => {
     const properties = {
         board,
         ships,
+        missedAttacks: [],
+
 
     };
 
@@ -92,6 +93,19 @@ const gameBoard = (ships) => {
             }
             return temp.length;
         },
+        receiveAttack: (xCoord,yCoord) => {
+            if(board[xCoord][yCoord].hasShip){
+                board[xCoord][yCoord].ship.receivesAttackAt(xCoord,yCoord);
+            }
+            else{
+                properties.missedAttacks.push(pointMaker(xCoord,yCoord))
+
+            }
+        },
+        isGameOver: () => {
+            return ships.filter(ship => ship.isSunk()).length === ships.length;
+        }
+
 
 
     };
